@@ -15,6 +15,7 @@ import br.edu.utfpr.dv.siacoes.model.Department;
 public class DepartmentDAO {
 
 	public Department findById(int id) throws SQLException{
+		// Tentei transformar a instanciação do objeto conn e sua chamada de função igual na linha 24 "conn = ConnectionDAO.getInstance().getConnection()" em uma função onde o retorno era o próprio conn, mas acabou demonstrando não valer a pena, apenas deixando o codigo mais dificil de entender
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -36,6 +37,9 @@ public class DepartmentDAO {
 				return null;
 			}
 		}finally{
+			// Tentei transformar essas 3 condições que se repetem em toda chama de função em um função que receberia por parametro os itens 'conn', 'stmt' e 'rs' e realizaria as condições, mas por algum motivo meu editor de código(vscode) me deu um warning de que isso não seria possivel receber por parametro um objeto do tipo 'Connection', deixando de lado essa tentativa de deixar o codigo mais simples e reutilizavel.
+
+			// Eu analizei o restante do codigo, e dos outros arquivos, mas não consegui identificar uma parte do codigo que eu conseguiria deixar mais simples, reutilizel para melhorar a manutenabilidade.
 			if((rs != null) && !rs.isClosed())
 				rs.close();
 			if((stmt != null) && !stmt.isClosed())
